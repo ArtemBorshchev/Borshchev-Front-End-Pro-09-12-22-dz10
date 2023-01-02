@@ -1,94 +1,55 @@
-/* Написати цикли, які роблять наступне:
-...
-1 Вивести числа від 20 до 30 через пропуск, використовуючи крок 0,5 (20 20,5 21 21,5….).
-2 Один долар коштує 27 гривень. Вивести дані з розрахунком вартості 10, 20, 30... 100 доларів.
-3 Дане ціле число. Вивести всі цілі числа від 1 до 100, квадрат яких не перевищує числа N.
-4 Дане ціле число. З'ясувати, чи є воно простим (простим називається число, більше 1,
-  які не мають інших дільників крім 1 і себе).
-5 Дане деяке число. Визначити, чи можна одержати це число шляхом зведення
-числа 3 у деякий ступінь. (Наприклад, числа 9, 81 можна отримати, а 13 - не можна). */
-
-function startEnd() {
-  let stDiap = +document.getElementById('g-1').value;
-  let endDiap = +document.getElementById('g-2').value;
-  const ArrNum = [];
-  let obmenPeremennyh = null;
-  if (stDiap > endDiap) {
-    obmenPeremennyh = stDiap;
-    stDiap = endDiap;
-    endDiap = obmenPeremennyh;
-  }
-  for (stDiap; stDiap < endDiap; stDiap += 0.5) {
-    ArrNum.push(` ${stDiap}`);
-  }
-  document.getElementById('out-1').innerHTML = ArrNum;
+/* eslint-disable no-console */
+/* eslint-disable no-alert */
+//
+let arrLeng = +prompt('Введіть розмір масиву: ');
+if (Number.isNaN(arrLeng)) {
+  do {
+    arrLeng = +prompt('Введіть розмір масиву: ');
+  } while (Number.isNaN(arrLeng));
 }
+console.log(arrLeng);
+const ArrUser = [];
 
-function currencyExch() {
-  const exchRate = +document.getElementById('g-3').value;
-  let tablePrint = '<ul>';
-  for (let i = 10; i < 101; i += 10) {
-    tablePrint += `<li> ${i} USD = ${exchRate * i} UAH </li>`;
+for (let i = 0; i < arrLeng; i += 1) {
+  let userInput = +prompt('Введіть елемент масиву: ');
+  if (Number.isNaN(userInput)) {
+    do {
+      userInput = +prompt('Дозволенно ввод тільки цифр. Введіть числовий елемент масиву: ');
+    } while (Number.isNaN(userInput) || userInput < 0);
   }
-  tablePrint += '</ul>';
-  document.getElementById('out-2').innerHTML = tablePrint;
+  ArrUser.push(userInput);
+  console.log(`${i} element is: ${ArrUser[i]}`);
+  if (userInput === null) {
+    break;
+  }
 }
-
-function qwrtNumber() {
-  let enterNumber = +document.getElementById('g-4').value;
-  if (enterNumber % 1 > 0) {
-    enterNumber = enterNumber - (enterNumber % 1) + 1;
-  } else if (enterNumber % 1 < 0) {
-    enterNumber -= enterNumber % 1;
-  }
-  const ArrNum = [];
-  for (let i = 1; i < 101; i += 1) {
-    if (i * i < enterNumber) {
-      ArrNum.push(` ${i}`);
+console.log(ArrUser);
+// ArrUser.sort()   //при сортировке игнорирует 10 введенную через промпт
+// розберусь із цим методом пізніше, а поки написав сортування
+// сортування за зростанняс (або за спаданняс якщо змінити зкак < >)
+for (let i = 0; i < ArrUser.length; i += 1) {
+  let maxOrMinArrElement = i;
+  for (let j = i + 1; j < ArrUser.length; j += 1) {
+    if (ArrUser[maxOrMinArrElement] > ArrUser[j]) {
+      maxOrMinArrElement = j;
     }
   }
-  document.getElementById('out-3').innerHTML = ArrNum;
-}
-
-function isPrimeNumber() {
-  const enterNumber = +document.getElementById('g-5').value;
-  let numberCounter = 0;
-  for (let i = 2; i < enterNumber; i += 1) {
-    if ((enterNumber / i) % 1 === 0) {
-      document.getElementById('out-4').innerHTML = 'Введене число не є простим!';
-      numberCounter += 1;
-      break;
-    }
-  }
-  if (numberCounter === 0) {
-    document.getElementById('out-4').innerHTML = 'ВВЕДЕНЕ ЧИСЛО - ПРОСТЕ';
+  if (maxOrMinArrElement !== i) {
+    const buFer = ArrUser[i];
+    ArrUser[i] = ArrUser[maxOrMinArrElement];
+    ArrUser[maxOrMinArrElement] = buFer;
   }
 }
 
-function numberSqrt3() {
-  const enterNumber = +document.getElementById('g-6').value;
-  const testNumber = 3;
-  let countOfSqrt = 1;
-  let findNumber = 3;
-  for (let i = 0; i < 15; i += 1) {
-    findNumber *= testNumber;
-    if (findNumber < enterNumber) {
-      countOfSqrt += 1;
-    } else if (findNumber === enterNumber) {
-      countOfSqrt += 1;
-      document.getElementById('out-5').innerHTML = `Це число можна одержати 
-      шляхом зведення ${testNumber} у ${countOfSqrt} ступінь`;
-      break;
-    } else {
-      document.getElementById('out-5').innerHTML = `Це число НЕМОЖЛИВО одержати 
-      шляхом зведення ${testNumber} у деяку ступінь`;
-      break;
-    }
-  }
-}
+console.log(ArrUser);
 
-document.getElementById('g1-1').onclick = startEnd;
-document.getElementById('g2-1').onclick = currencyExch;
-document.getElementById('g3-1').onclick = qwrtNumber;
-document.getElementById('g4-1').onclick = isPrimeNumber;
-document.getElementById('g5-1').onclick = numberSqrt3;
+let startDell = +prompt('enter start dell index: ');
+if (startDell < 0 || startDell >= ArrUser.length) {
+  do {
+    startDell = +prompt(`enter start dell index from 0 to ${ArrUser.length - 1} `);
+  } while (startDell < 0 || startDell >= ArrUser.length);
+}
+const indexesDell = +prompt('how many indexes we\'ll dell: ');
+ArrUser.splice(startDell, indexesDell);
+
+console.log(ArrUser);
