@@ -1,0 +1,24 @@
+{
+  "name": "dz10",
+  "version": "1.0.0",
+  "description": "",
+  "main": "INDEX.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArtemBorshchev/Borshchev-Front-End-Pro-09-12-22-dz10.git"
+  },
+  "author": "Artem Borshchev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArtemBorshchev/Borshchev-Front-End-Pro-09-12-22-dz10/issues"
+  },
+  "homepage": "https://github.com/ArtemBorshchev/Borshchev-Front-End-Pro-09-12-22-dz10#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
